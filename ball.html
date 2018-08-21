@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>愤怒的小球</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+    }
+    #ball-container {
+      border: 2px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="ball-container" width="600" height="300"></canvas>
+</body>
+<script>
+  var canvas = document.getElementById('ball-container');
+  var ctx = canvas.getContext('2d');
+  var raf;
+  var ball = {
+    x: 80,
+    y: 80,
+    stepx: 5,
+    stepy: 2,
+    radius: 25,
+    color: 'pink',
+    draw: function () {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+      ctx.closePath();
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    }
+  }
+  function draw () {
+    // ctx.clearRect(0, 0, canvas.width, canvas.height); // 清屏再画一个小球
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ball.x += ball.stepx;
+    ball.y += ball.stepy;
+    ball.stepy *= .99;
+    ball.stepy += .25;
+    if (ball.y + ball.stepy >= canvas.height || ball.y + ball.stepy < 0) {
+      ball.stepy = -ball.stepy;
+    }
+    if (ball.x + ball.stepx >= canvas.width || ball.x + ball.stepx < 0) {
+      ball.stepx = -ball.stepx;
+    }
+    ball.draw();
+    raf = window.requestAnimationFrame(draw);
+  };
+  window.onload = function () {
+    raf = window.requestAnimationFrame(draw);
+  };
+  ball.draw();
+</script>
+</html>

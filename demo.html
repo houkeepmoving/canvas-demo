@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cavans-demo</title>
+</head>
+<body>
+  <canvas id="canvas-demo1" width="200" height="200"></canvas>
+  <canvas id="canvas-demo2" width="200" height="200"></canvas>
+</body>
+<script>
+  var ctx = document.querySelector('#canvas-demo1').getContext('2d');
+  var ctx2 = document.querySelector('#canvas-demo2').getContext('2d');
+  for (var i = 0; i <= 20; i++) {
+    for (var j = 0; j <= 20; j++) {
+      ctx.fillRect(i * 20, j * 20, 20, 20);
+      ctx.fillStyle = 'rgb(' + Math.floor(255-42.5*i) + ',' + Math.floor(255-42.5*j) + ',0)';
+    }
+  };
+
+  ctx2.fillStyle = '#FD0'; // 画布背景色
+  ctx2.fillRect(0, 0, 75, 75);
+  ctx2.fillStyle = '#6C0';
+  ctx2.fillRect(0, 75, 75, 75);
+  ctx2.fillStyle = '#09F';
+  ctx2.fillRect(75, 0, 75, 75);
+  ctx2.fillStyle = '#F30';
+  ctx2.fillRect(75, 75, 75, 75);
+  ctx2.fillStyle = '#FFF';
+  ctx2.globalAlpha = 0.2;
+  for (var i = 0; i <= 6; i++ ) {
+    ctx2.beginPath();
+    ctx2.arc(75, 75, 10 + 10*i, 0, Math.PI*2, true);
+    ctx2.fill();
+  }
+</script>
+</html>
